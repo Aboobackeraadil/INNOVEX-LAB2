@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INNOVEX LABS - With FAQ Bot</title>
-    
+    <title>INNOVEX LABS Website</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
-        /* --- General Site Styles (From Original Second File) --- */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap'); /* Added Inter font for consistency */
+        /* Add your custom styles here */
         body {
             padding-top: 56px; /* Adjust based on your navigation bar height */
         }
@@ -85,22 +81,9 @@
             padding: 30px;
         }
 
-        #support form label {
-            font-weight: bold;
-        }
-
-        #support form textarea {
-            resize: none;
-        }
-
         #support form button {
             background-color: #007bff;
             color: #ffffff;
-            font-weight: bold;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
         #support form button:hover {
@@ -114,27 +97,50 @@
             padding: 40px 0;
             margin-top: 20px;
         }
-
-        /* --- Chatbot Specific Styles (To float it) --- */
-        #chatbot-container {
-            /* Positioning the chatbot fixed to the bottom right */
+        
+        /* 🤖 CHATBOT SPECIFIC CSS FIXES 🤖 */
+        
+        /* 1. Chatbot Widget (The overall floating container) */
+        #chatbot-widget {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 1000; /* Ensure it stays above other content */
-            width: 100%;
-            max-width: 380px; /* Slightly larger max-width */
-            height: 500px; /* Shorter height for better visibility on site */
-            display: none; /* Initially hidden */
+            z-index: 1000;
+            
+            /* FIX: Use Flexbox to stack elements vertically */
+            display: flex;
+            flex-direction: column-reverse; /* Stacks the button at the bottom and the chat window above it */
+            align-items: flex-end; /* Ensures everything is right-aligned */
+            gap: 15px; /* Space between button and chat window */
+        }
+
+        /* 2. Chatbot Container (The actual chat window) */
+        #chatbot-container {
+            display: none; /* Hidden by default */
+            /* Removed absolute positioning, Flexbox now handles alignment */
         }
         
-        /* Optional: Style for the floating button (if you want to implement it) */
-        #chatbot-toggle-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+        /* 3. Floating Button Style */
+        #chatbot-toggle-btn {
+            background-color: #4f46e5;
+            color: white;
+            border-radius: 9999px;
+            padding: 16px; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: background-color 0.3s;
             z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
+        #chatbot-toggle-btn:hover {
+            background-color: #4338ca;
+        }
+        
+        /* Custom font for chatbot */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
     </style>
 </head>
 <body>
@@ -158,9 +164,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="#support">Support</a>
             </li>
-             <li class="nav-item">
-                <a class="nav-link cursor-pointer" id="toggle-chatbot">Chatbot FAQ</a>
-            </li>
         </ul>
     </div>
 </nav>
@@ -178,12 +181,12 @@
     </div>
 </section>
 
-<section id="services" class="container py-5">
-    <h1 class="text-center mb-5">Our Services</h1>
+<section id="services" class="container">
+    <h1 class="text-center">Our Services</h1>
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="pexels-k-photos-744366 - Copy.jpg" class="card-img-top" alt="DIY Workshop Image">
+                <img src="pexels-k-photos-744366 - Copy.jpg" alt="">
                 <div class="card-body">
                     <h5 class="card-title">DIY WORKSHOP</h5>
                     <p class="card-text">Unleash your inner DIY enthusiast with our curated collection of do-it-yourself projects. Join the DIY revolution and discover the joy of crafting.</p>
@@ -192,7 +195,7 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="pexels-karolina-grabowska-7285970.jpg" class="card-img-top" alt="Electronics Image">
+                <img src="pexels-karolina-grabowska-7285970.jpg" alt="">
                 <div class="card-body">
                     <h5 class="card-title">ELECTRONICS</h5>
                     <p class="card-text">Step into the world of endless possibilities with INNOVEX LABS Electronics DIY – where circuits become your canvas and innovation knows no bounds!</p>
@@ -201,7 +204,7 @@
         </div>
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="pexels-tima-miroshnichenko-6755135 - Copy.jpg" class="card-img-top" alt="Circuit Designing Image">
+                <img src="pexels-tima-miroshnichenko-6755135 - Copy.jpg" alt="">
                 <div class="card-body">
                     <h5 class="card-title">CIRCUIT DESIGNING</h5>
                     <p class="card-text">Explore the art of innovation with INNOVEX LABS Circuit Design – where ideas spark to life, and creativity flows through every connection.</p>
@@ -211,9 +214,9 @@
     </div>
 </section>
 
-<section id="projects" class="bg-light py-5">
+<section id="projects" class="bg-light">
     <div class="container">
-        <h1 class="text-center mb-5">Our Projects</h1>
+        <h1 class="text-center">Our Projects</h1>
         <div class="row">
             <div class="col-md-4 mb-4 fade-in">
                 <div class="card">
@@ -283,242 +286,257 @@
     </div>
 </footer>
 
-<div id="chatbot-container" class="bg-white shadow-2xl rounded-xl w-full max-w-sm flex flex-col overflow-hidden">
+<div id="chatbot-widget">
     
-    <div class="p-4 bg-indigo-600 text-white flex items-center justify-between rounded-t-xl">
-        <div class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 mr-3">
-                <path d="M12 2a4 4 0 0 0-4 4v.5A2.5 2.5 0 0 1 10.5 9h3A2.5 2.5 0 0 1 16 6.5V6a4 4 0 0 0-4-4Z"/><path d="m14 11-1.5 6-2-3-2 3-1.5-6"/><path d="M2 19h20"/><path d="M12 19v3"/>
-            </svg>
-            <h1 class="text-lg font-bold">Menu Navigator</h1>
-        </div>
-        <button id="close-chatbot" class="text-white hover:text-indigo-200 transition duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
+    <div id="chatbot-toggle-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
+            <path d="M12 2a4 4 0 0 0-4 4v.5A2.5 2.5 0 0 1 10.5 9h3A2.5 2.5 0 0 1 16 6.5V6a4 4 0 0 0-4-4Z"/><path d="m14 11-1.5 6-2-3-2 3-1.5-6"/><path d="M2 19h20"/><path d="M12 19v3"/>
+        </svg>
     </div>
-
-    <div id="messages" class="flex-grow p-4 space-y-4 overflow-y-auto bg-gray-50">
-        </div>
-
-    <div class="p-4 border-t border-gray-200">
-        <form id="chat-form" class="flex items-center">
-            <input type="text" id="user-input" placeholder="Type a number or 'MENU'..." 
-                        class="flex-grow p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150">
-            <button type="submit" id="send-button"
-                        class="p-3 bg-indigo-600 text-white rounded-r-lg hover:bg-indigo-700 transition duration-150 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
-                    <path d="M5 12l14-7L12 21 5 12z" />
-                    <path d="M12 21L12 12" />
+    
+    <div id="chatbot-container" class="bg-white shadow-2xl rounded-xl w-full max-w-sm flex flex-col h-[600px] overflow-hidden">
+        
+        <div class="p-4 bg-indigo-600 text-white flex items-center justify-between rounded-t-xl">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 mr-3">
+                    <path d="M12 2a4 4 0 0 0-4 4v.5A2.5 2.5 0 0 1 10.5 9h3A2.5 2.5 0 0 1 16 6.5V6a4 4 0 0 0-4-4Z"/><path d="m14 11-1.5 6-2-3-2 3-1.5-6"/><path d="M2 19h20"/><path d="M12 19v3"/>
                 </svg>
-            </button>
-        </form>
+                <h1 class="text-lg font-bold" style="font-family: 'Inter', sans-serif;">Menu Navigator</h1>
+            </div>
+            <div class="text-xs opacity-70">Client-Side Logic</div>
+        </div>
+
+        <div id="messages" class="flex-grow p-4 space-y-4 overflow-y-auto bg-gray-50" style="font-family: 'Inter', sans-serif;">
+            </div>
+
+        <div class="p-4 border-t border-gray-200">
+            <form id="chat-form" class="flex items-center">
+                <input type="text" id="user-input" placeholder="Type a number or 'MENU'..." 
+                        class="flex-grow p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150" style="font-family: 'Inter', sans-serif;">
+                <button type="submit" id="send-button"
+                        class="p-3 bg-indigo-600 text-white rounded-r-lg hover:bg-indigo-700 transition duration-150 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                        <path d="M5 12l14-7L12 21 5 12z" />
+                        <path d="M12 21L12 12" />
+                    </svg>
+                </button>
+            </form>
+        </div>
     </div>
+    
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
-    // --- MAIN SITE SCRIPTS ---
     document.addEventListener('DOMContentLoaded', function () {
-        // Trigger the fade-in animation when the project cards are in the viewport
+        // --- Projects Fade-in Animation (Scroll Triggered) ---
         const projectCards = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.1
+        });
         projectCards.forEach(card => {
-            card.classList.add('active');
+            observer.observe(card);
         });
 
-        // --- CHATBOT TOGGLE LOGIC ---
+        // --- Chatbot Toggle Logic ---
         const chatbotContainer = document.getElementById('chatbot-container');
-        const toggleButton = document.getElementById('toggle-chatbot');
-        const closeButton = document.getElementById('close-chatbot');
-
-        toggleButton.addEventListener('click', () => {
-            chatbotContainer.style.display = chatbotContainer.style.display === 'flex' ? 'none' : 'flex';
-            // If the chat is opened, ensure the main menu is displayed
-            if (chatbotContainer.style.display === 'flex' && !messagesContainer.children.length) {
-                displayMenu('main'); 
-            }
-        });
+        const toggleButton = document.getElementById('chatbot-toggle-btn');
         
-        closeButton.addEventListener('click', () => {
-            chatbotContainer.style.display = 'none';
-        });
-
-        // --- CHATBOT CORE LOGIC (From Original First File) ---
-        const messagesContainer = document.getElementById('messages');
-        const userInput = document.getElementById('user-input');
-        const chatForm = document.getElementById('chat-form');
-        
-        // --- CHAT STATE AND KNOWLEDGE BASE ---
-        let currentMenuState = 'main'; // Tracks the current conversational context
-        
-        // This object defines the entire conversation flow logic and content
-        const conversationFlow = {
-            // LEVEL 0: MAIN MENU
-            'main': {
-                prompt: "Welcome to the Support Navigator! What can I help you with today? Please select an option:",
-                options: {
-                    '1': { text: 'What are the events', nextState: 'events' },
-                    '2': { text: 'How to register', nextState: 'Register' }, // Corrected 'Resister' to 'Register'
-                    '3': { text: 'location', nextState: 'location' },
-                    '4': { text: 'know about specific events', nextState: 'specificevents' } 
-                }
-            },
-            // LEVEL 1: EVENTS SUB-MENU
-            'events': {
-                prompt: "You chose what are the events. Please select a specific question:",
-                options: {
-                    '1': { text: 'umerabdussalam ,ceo edapt', answer: " Event starts at 9:00 and end at 10:00" },
-                    '2': { text: 'Alphons NJ', answer: "Event starts at 9:00 and end at 10:00" },
-                    '3': { text: 'Abdul shakoor , Principal lbscek', answer: "Event starts at 9:00 and end at 10:00." }
-                }
-            },
-            // LEVEL 1: REGISTER SUB-MENU
-            'Register': {
-                prompt: "do you want to know more about registration. Please select a specific question:",
-                options: {
-                    '1': { text: 'know about the price?', answer: "rs 749 / per head" },
-                    '2': { text: 'know about the bulk registration?', answer: "rs 700/per head." }
-                }
-            },
-            // LEVEL 1: LOCATION SUB-MENU
-            'location': {
-                prompt: "do you want to know more about location. Please select a specific question:",
-                options: {
-                    '1': { text: 'which bus route i want to take from railway station?', answer: "new bustand route" },
-                    '2': { text: 'which bus i want to take from new bustand?', answer: "bovikkana route" },
-                    '3': { text: 'Do you want google maps location ?', answer: "jshbdjfdjfjfkdjkedjdj/here is the link" }
-                }
-            },
-            // LEVEL 1: SPECIFIC EVENTS SUB-MENU
-            'specificevents': {
-                prompt: "You chose know about specific events. Please select a specific question:",
-                options: {
-                    '1': { text: 'drone show', answer: "Entry fee 500 held at ad block" },
-                    '2': { text: 'Idea pitching competition', answer: "Entry fee 500 held at ad block" },
-                    '3': { text: 'robowars', answer: "Entry fee 500 held at ad block" }
-                }
-            }
-        };
-
-        // --- UTILITY FUNCTIONS ---
-
-        function createMessageElement(text, sender) {
-            const messageDiv = document.createElement('div');
-            const isBot = sender === 'bot';
-            
-            messageDiv.className = `flex ${isBot ? 'justify-start' : 'justify-end'}`;
-
-            const bubble = document.createElement('div');
-            bubble.className = `max-w-[80%] p-3 rounded-xl shadow-md ${
-                isBot 
-                    ? 'bg-indigo-100 text-gray-800 rounded-tl-none' 
-                    : 'bg-indigo-600 text-white rounded-br-none'
-            }`;
-            bubble.innerHTML = formatText(text); 
-            messageDiv.appendChild(bubble);
-            messagesContainer.appendChild(messageDiv);
-            
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // Simple Markdown-to-HTML conversion 
-        function formatText(text) {
-            let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            return html;
-        }
-        
-        // --- CORE FLOW LOGIC ---
-
-        function displayMenu(stateKey) {
-            const flow = conversationFlow[stateKey];
-            
-            // Build the menu text
-            let menuText = `<p class="mb-2">${flow.prompt}</p><ul class="list-disc pl-5">`;
-
-            // Display options with their numbers
-            for (const key in flow.options) {
-                menuText += `<li class="mb-1"><strong>${key}.</strong> ${flow.options[key].text}</li>`;
-            }
-
-            // Add the back-to-menu option if it's not the main menu
-            if (stateKey !== 'main') {
-                menuText += `<li class="mt-2">Type <strong>MENU</strong> to return to the main topics.</li>`;
+        toggleButton.addEventListener('click', function() {
+            // FIX: Ensure 'flex' is used to display the container for correct alignment
+            if (chatbotContainer.style.display === 'flex') {
+                chatbotContainer.style.display = 'none';
             } else {
-                menuText += `<li class="mt-2">Type <strong>MENU</strong> to show this main list again.</li>`;
+                chatbotContainer.style.display = 'flex'; 
             }
-            menuText += '</ul>';
-
-            createMessageElement(menuText, 'bot');
-            currentMenuState = stateKey;
-        }
-
-        function handleUserChoice(input) {
-            const normalizedInput = input.trim().toUpperCase();
-            const currentState = conversationFlow[currentMenuState];
-
-            // 1. Handle MENU command (Reset Flow)
-            if (normalizedInput === 'MENU') {
-                displayMenu('main');
-                return;
-            }
-
-            // 2. Check for a valid numeric choice within the current menu
-            if (currentState.options[normalizedInput]) {
-                const choice = currentState.options[normalizedInput];
-
-                if (choice.answer) {
-                    // LEVEL 2: Answer Found (Question selected)
-                    // Display user's question before the bot's answer
-                    createMessageElement(`**Question:** ${choice.text}`, 'user'); 
-                    createMessageElement(`**Answer:** ${choice.answer}`, 'bot');
-                    
-                    // After answering, IMMEDIATELY reset to the main menu
-                    displayMenu('main');
-                    return;
-                } 
-                
-                if (choice.nextState) {
-                    // LEVEL 0: Category Selected (Move to Sub-Menu)
-                    // Show user selection, then the new menu
-                    createMessageElement(`**Selected:** ${choice.text}`, 'user'); 
-                    displayMenu(choice.nextState);
-                    return;
-                }
-            }
-
-            // 3. Handle Invalid Input
-            createMessageElement(`I didn't recognize that input. Please type a number from the menu or type 'MENU' to restart.`, 'bot');
-            // Redisplay the current menu to guide the user
-            displayMenu(currentMenuState); 
-        }
-
-        // --- EVENT HANDLER ---
-        chatForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const input = userInput.value.trim();
-            if (input === '') return;
-
-            // Display user input first
-            // Note: The original code displayed user input inside handleUserChoice only for category selection, 
-            // but for a smooth chat flow, it's better to show it here for all inputs.
-            // However, to strictly adhere to the original logic where *only* menu selections are logged as user bubbles,
-            // I'll keep the user message creation inside handleUserChoice for state changes/answers, but clear the input here.
-            
-            // Re-implementing to ensure the input is cleared and processing starts
-            // We'll trust handleUserChoice to create the user bubble when needed.
-            userInput.value = '';
-
-            // Process the choice
-            handleUserChoice(input);
         });
-
-        // --- INITIALIZATION ---
-        // Do NOT auto-start the chatbot, wait for the user to click the toggle button.
-        // The chatbot state needs to be managed when it's opened for the first time.
-        // The logic for displaying the menu on first click is in the toggleButton event listener.
     });
 </script>
 
+
+<script>
+    const messagesContainer = document.getElementById('messages');
+    const userInput = document.getElementById('user-input');
+    const chatForm = document.getElementById('chat-form');
+    
+    // --- CHAT STATE AND KNOWLEDGE BASE ---
+    let currentMenuState = 'main'; // Tracks the current conversational context
+    
+    // This object defines the entire conversation flow logic and content
+    const conversationFlow = {
+        // LEVEL 0: MAIN MENU
+        'main': {
+            prompt: "Welcome to the Support Navigator! What can I help you with today? Please select an option:",
+            options: {
+                '1': { text: 'What are the events', nextState: 'events' },
+                '2': { text: 'How to register', nextState: 'Register' },
+                '3': { text: 'location', nextState: 'location' },
+                '4': { text: 'know about specific events', nextState: 'specificevents' } 
+            }
+        },
+        // LEVEL 1: EVENTS SUB-MENU
+        'events': {
+            prompt: "You chose what are the events. Please select a specific question:",
+            options: {
+                '1': { text: 'umerabdussalam ,ceo edapt', answer: " Event starts at 9:00 and end at 10:00" },
+                '2': { text: 'Alphons NJ', answer: "Event starts at 9:00 and end at 10:00" },
+                '3': { text: 'Abdul shakoor , Principal lbscek', answer: "Event starts at 9:00 and end at 10:00." }
+            }
+        },
+        // LEVEL 1: REGISTER SUB-MENU
+        'Register': {
+            prompt: "do you want to know more about registration. Please select a specific question:",
+            options: {
+                '1': { text: 'know about the price?', answer: "rs 749 / per head" },
+                '2': { text: 'know about the bulk registration?', answer: "rs 700/per head." }
+            }
+        },
+        // LEVEL 1: LOCATION SUB-MENU
+        'location': {
+            prompt: "do you want to know more about location. Please select a specific question:",
+            options: {
+                '1': { text: 'which bus route i want to take from railway station?', answer: "new bustand route" },
+                '2': { text: 'which bus i want to take from new bustand?', answer: "bovikkana route" },
+                '3': { text: 'Do you want google maps location ?', answer: "jshbdjfdjfjfkdjkedjdj/here is the link" }
+            }
+        },
+        // LEVEL 1: SPECIFIC EVENTS SUB-MENU
+        'specificevents': {
+            prompt: "You chose Account Management. Please select a specific question:",
+            options: {
+                '1': { text: 'drone show', answer: "Entry fee 500 held at ad block" },
+                '2': { text: 'Idea pitching competition', answer: "Entry fee 500 held at ad block" },
+                '3': { text: 'robowars', answer: "Entry fee 500 held at ad block" }
+            }
+        }
+    };
+
+    // --- UTILITY FUNCTIONS ---
+
+    function createMessageElement(text, sender) {
+        const messageDiv = document.createElement('div');
+        const isBot = sender === 'bot';
+        
+        messageDiv.className = `flex ${isBot ? 'justify-start' : 'justify-end'}`;
+
+        const bubble = document.createElement('div');
+        bubble.className = `max-w-[80%] p-3 rounded-xl shadow-md ${
+            isBot 
+                ? 'bg-indigo-100 text-gray-800 rounded-tl-none' 
+                : 'bg-indigo-600 text-white rounded-br-none'
+        }`;
+        bubble.innerHTML = formatText(text); 
+        messageDiv.appendChild(bubble);
+        messagesContainer.appendChild(messageDiv);
+        
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Simple Markdown-to-HTML conversion 
+    function formatText(text) {
+        let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        return html;
+    }
+    
+    // --- CORE FLOW LOGIC ---
+
+    function displayMenu(stateKey) {
+        const flow = conversationFlow[stateKey];
+        
+        // Build the menu text
+        let menuText = `<p class="mb-2">${flow.prompt}</p><ul class="list-disc pl-5">`;
+
+        // Display options with their numbers
+        for (const key in flow.options) {
+            menuText += `<li class="mb-1"><strong>${key}.</strong> ${flow.options[key].text}</li>`;
+        }
+
+        // Add the back-to-menu option if it's not the main menu
+        if (stateKey !== 'main') {
+            menuText += `<li class="mt-2">Type <strong>MENU</strong> to return to the main topics.</li>`;
+        } else {
+            menuText += `<li class="mt-2">Type <strong>MENU</strong> to show this main list again.</li>`;
+        }
+        menuText += '</ul>';
+
+        createMessageElement(menuText, 'bot');
+        currentMenuState = stateKey;
+    }
+
+    function handleUserChoice(input) {
+        const normalizedInput = input.trim().toUpperCase();
+        const currentState = conversationFlow[currentMenuState];
+
+        // 1. Handle MENU command (Reset Flow)
+        if (normalizedInput === 'MENU') {
+            displayMenu('main');
+            return;
+        }
+
+        // 2. Check for a valid numeric choice within the current menu
+        if (currentState.options[normalizedInput]) {
+            const choice = currentState.options[normalizedInput];
+
+            if (choice.answer) {
+                // LEVEL 2: Answer Found (Question selected)
+                createMessageElement(`**Question:** ${choice.text}`, 'user'); 
+                createMessageElement(`**Answer:** ${choice.answer}`, 'bot');
+                
+                // After answering, IMMEDIATELY reset to the main menu
+                displayMenu('main');
+                return;
+            } 
+            
+            if (choice.nextState) {
+                // LEVEL 0: Category Selected (Move to Sub-Menu)
+                displayMenu(choice.nextState);
+                return;
+            }
+        }
+
+        // 3. Handle Invalid Input
+        createMessageElement(`I didn't recognize that input. Please type a number from the menu or type 'MENU' to restart.`, 'bot');
+        displayMenu(currentMenuState); 
+    }
+
+    // --- EVENT HANDLER ---
+    chatForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const input = userInput.value.trim();
+        if (input === '') return;
+
+        // Display user input only if it's not the final selection number
+        const isFinalAnswerSelection = currentState => {
+            const normalizedInput = input.trim().toUpperCase();
+            if (currentState.options && currentState.options[normalizedInput]) {
+                return !!currentState.options[normalizedInput].answer;
+            }
+            return false;
+        };
+
+        if (!isFinalAnswerSelection(conversationFlow[currentMenuState])) {
+            createMessageElement(input, 'user');
+        }
+        
+        userInput.value = '';
+
+        // Process the choice
+        handleUserChoice(input);
+    });
+
+    // --- INITIALIZATION ---
+    // Start the chatbot by showing the Main Menu
+    displayMenu('main'); 
+</script>
 </body>
 </html>
